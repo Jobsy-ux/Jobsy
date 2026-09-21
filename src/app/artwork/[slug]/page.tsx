@@ -9,6 +9,7 @@ import { DemoMarker } from '@/components/primitives/DemoMarker';
 import { ExternalLink } from '@/components/primitives/ExternalLink';
 import { getRepository } from '@/data';
 import { displayTitle, externalPracticeLinks, isLinkPresentable, ownedWorkLinks } from '@/domain';
+import { absoluteUrl, routes, SITE_NAME } from '@/lib/site';
 
 export function generateStaticParams() {
   return getRepository()
@@ -26,11 +27,22 @@ export async function generateMetadata({
   if (!artwork) return { title: 'Not found' };
   const artist = getRepository().getArtist(artwork.artistSlug);
 
+  const title = `${displayTitle(artwork)} — ${artist?.name ?? 'Unattributed'}`;
+  const description = artwork.description ?? `${artwork.medium}. In the House of Nucci Collection.`;
+
   return {
-    title: `${displayTitle(artwork)} — ${artist?.name ?? 'Unattributed'}`,
-    description: artwork.description ?? `${artwork.medium}. In the House of Nucci Collection.`,
-    alternates: { canonical: `/artwork/${artwork.slug}` },
-    /* Demo records are never indexed and never given a social card (§91). */
+    title,
+    description,
+    alternates: { canonical: absoluteUrl(routes.artwork(artwork.slug)) },
+    openGraph: {
+      title,
+      description,
+      url: absoluteUrl(routes.artwork(artwork.slug)),
+      siteName: SITE_NAME,
+      type: 'article',
+    },
+    twitter: { card: 'summary_large_image', title, description },
+    /* Demo records are never indexed and never offered as a social card (§91). */
     robots: artwork.isPlaceholder ? { index: false, follow: false } : undefined,
   };
 }
@@ -49,6 +61,7 @@ export default async function ArtworkPage({ params }: { params: Promise<{ slug: 
   if (!artwork) notFound();
 
   const artist = repo.getArtist(artwork.artistSlug);
+  const collector = repo.getCollector();
   const series = artwork.seriesSlug ? repo.getSeries(artwork.seriesSlug) : null;
   const placement = repo.findPlacement(artwork.slug);
   const owned = ownedWorkLinks(artwork.links).filter(isLinkPresentable);
@@ -127,6 +140,29 @@ export default async function ArtworkPage({ params }: { params: Promise<{ slug: 
                 <h2 className="hon-label">About this work</h2>
                 <p className="hon-prose" style={{ marginTop: 'var(--hon-space-3)' }}>
                   {artwork.description}
+                </p>
+              </div>
+            ) : null}
+
+            {artwork.whyInTheHouse ? (
+              /* The collector's own account, attributed to them. On a personal collection
+                 this is the most valuable thing on the page — and the one thing no
+                 marketplace can reproduce (docs/POSITIONING.md). */
+              <div
+                style={{
+                  borderLeft: '1px solid var(--hon-brass-dim)',
+                  paddingLeft: 'var(--hon-space-5)',
+                }}
+              >
+                <h2 className="hon-label" style={{ color: 'var(--hon-brass)' }}>
+                  Why it’s in the House
+                  <span className="hon-quiet"> — {collector.name}</span>
+                </h2>
+                <p
+                  className="hon-prose"
+                  style={{ marginTop: 'var(--hon-space-3)', color: 'var(--hon-bone)' }}
+                >
+                  {artwork.whyInTheHouse}
                 </p>
               </div>
             ) : null}

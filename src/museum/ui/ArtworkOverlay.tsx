@@ -93,6 +93,20 @@ export function ArtworkOverlay({
             </p>
           ) : null}
 
+          {artwork.whyInTheHouse ? (
+            <div style={{ borderLeft: '1px solid var(--hon-brass-dim)', paddingLeft: 'var(--hon-space-4)' }}>
+              <span className="hon-label" style={{ color: 'var(--hon-brass)' }}>
+                Why it’s in the House
+              </span>
+              <p
+                className="hon-prose"
+                style={{ fontSize: 'var(--hon-size-small)', marginTop: 'var(--hon-space-2)', color: 'var(--hon-bone)' }}
+              >
+                {artwork.whyInTheHouse}
+              </p>
+            </div>
+          ) : null}
+
           <div style={{ display: 'flex', gap: 'var(--hon-space-4)', flexWrap: 'wrap', marginTop: 'var(--hon-space-2)' }}>
             <Link href={`/artwork/${artwork.slug}`} className="hon-action">
               Open the full record

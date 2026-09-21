@@ -1,5 +1,20 @@
 # Deployment
 
+## Domain
+
+The canonical production domain is **https://houseofnucci.art**. It is the default in
+`src/lib/site.ts`, so canonical tags, the sitemap, robots, OpenGraph and social cards
+resolve to it without configuration. `NEXT_PUBLIC_SITE_URL` overrides it for local and
+preview builds.
+
+Public URL structure: `/` · `/museum` · `/collection` · `/artwork/[slug]` ·
+`/artist/[slug]` · `/series/[slug]` · `/exhibition/[slug]` · `/pathway/[slug]`.
+
+**DNS, registrar and CDN records are not configured**, and are not to be until the owner
+asks. When that happens: point the apex and `www` at the host, redirect `www` to the apex
+so there is one canonical spelling, issue certificates, and only then set
+`COLLECTION_MODE=production` so the site becomes indexable.
+
 ## Environments
 
 | Environment | Purpose | Collection mode |
@@ -27,7 +42,7 @@ the validator with `COLLECTION_MODE=production` so demo records cannot ship.
 
 | Variable | Where | Purpose |
 |---|---|---|
-| `NEXT_PUBLIC_SITE_URL` | build | canonical URLs, sitemap, social cards |
+| `NEXT_PUBLIC_SITE_URL` | build | overrides the canonical origin for local and preview builds; production needs no value |
 | `COLLECTION_MODE` | build | `production` enables the placeholder gate and indexing |
 | `OPENSEA_API_KEY` | server only | provider enrichment; never exposed to the browser |
 

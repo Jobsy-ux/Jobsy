@@ -44,9 +44,11 @@ export default function HomePage() {
             </span>
           </h1>
           <p className="hon-prose hon-measure">
-            A private collection of digital art, kept as an institution keeps things: with
-            a room to see it in, a record of where each work came from, and an account of
-            the people who made it.
+            {/* Personal, curated, and presented as a museum — with no claim about scale,
+                value or importance (docs/POSITIONING.md). */}
+            A personal collection of digital art, carefully assembled and kept the way an
+            institution keeps things: a room to see the work in, a record of where each
+            piece came from, and an account of the people who made it.
           </p>
         </div>
 

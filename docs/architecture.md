@@ -12,7 +12,7 @@ supabase/migrations  canonical schema ─┤ the cultural record
 src/domain          types · Zod schemas · invariants   ← framework-free
 src/data            repository interface + file-backed implementation
 src/providers       provider adapters · link health    ← the only code that knows about OpenSea
-src/lib             search · filters · taste · analytics · device tier · session
+src/lib             site identity · search · filters · taste · analytics · device tier · session
 src/museum          geometry · navigation · media director · R3F scene
 src/components      UI, grouped by surface
 src/app             routes
@@ -39,6 +39,8 @@ allows — not repeated as a convention in twelve components.
 | Provenance is never invented (§28) | `ProvenanceEvent.certainty` is required; the UI labels anything not `documented` |
 | Demo records are never mistaken for real ones (§91) | `isPlaceholder` is a required field, visible markers, sitemap exclusion, a production-mode build gate |
 | Untrusted metadata cannot become an href (§72) | `ExternalUrl` in the schema, `lib/url.safeExternalUrl`, and one `<ExternalLink>` primitive |
+| The House never overstates itself (`POSITIONING.md`) | One description in `lib/site.ts`, used for every page's metadata and social card; counts are rendered from the record as plain facts |
+| One canonical domain (A-1) | `lib/site.ts` — `absoluteUrl` and `routes` are the only spellings of a URL in the product |
 | The museum works without marketplaces (§73) | The repository never calls a provider; providers only write to the raw metadata table |
 
 ## Rendering strategy

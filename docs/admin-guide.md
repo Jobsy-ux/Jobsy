@@ -35,6 +35,9 @@ decision, never a side effect.
 - A placement's height is not editable, because it is derived from the work (§14).
 - A link must declare whether it refers to the work the House owns or to the artist's
   wider practice (§26).
+- `why_in_the_house` is the collector's own text. The CMS may prompt for it and must never
+  draft, summarise or auto-fill it, and the interface always attributes it to the collector
+  (`POSITIONING.md`).
 
 ## Later: the visual curator
 

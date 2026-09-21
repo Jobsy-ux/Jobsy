@@ -228,6 +228,8 @@ export const ArtistSchema = z.object({
   /** One line, factual, sourced. Not a marketing tagline. */
   overview: z.string().max(400).nullable().default(null),
   biography: z.string().max(12000).nullable().default(null),
+  /** Why this artist's work is in the House — the collector's account, not a biography. */
+  whyInTheHouse: z.string().max(8000).nullable().default(null),
   artistStatement: z.string().max(12000).nullable().default(null),
   process: z.string().max(12000).nullable().default(null),
   /** Every sourced prose field records where it came from. */
@@ -283,6 +285,14 @@ export const ArtworkSchema = z.object({
   medium: z.string().min(1).max(200),
   editionLabel: z.string().max(60).nullable().default(null),
   description: z.string().max(12000).nullable().default(null),
+  /**
+   * The collector's own account of why this work is here, in their voice (§34, and
+   * docs/POSITIONING.md). Optional and selective: the House's strength is a point of
+   * view, not a claim of importance, and the one thing no marketplace can reproduce is
+   * why someone chose a work. Always attributed to the collector, never written on their
+   * behalf.
+   */
+  whyInTheHouse: z.string().max(8000).nullable().default(null),
   notes: z.array(CuratorialNoteSchema).default([]),
   media: ArtworkMediaSchema,
   token: TokenBindingSchema.nullable().default(null),

@@ -5,6 +5,7 @@ import { ArtworkPlate } from '@/components/artwork/ArtworkPlate';
 import { DemoMarker } from '@/components/primitives/DemoMarker';
 import { ExternalLink } from '@/components/primitives/ExternalLink';
 import { getRepository } from '@/data';
+import { absoluteUrl, routes, SITE_NAME } from '@/lib/site';
 
 export function generateStaticParams() {
   return getRepository()
@@ -16,10 +17,20 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const artist = getRepository().getArtist(slug);
   if (!artist) return { title: 'Not found' };
+  const description = artist.overview ?? `${artist.name} in the House of Nucci Collection.`;
+
   return {
     title: artist.name,
-    description: artist.overview ?? `${artist.name} in the House of Nucci Collection.`,
-    alternates: { canonical: `/artist/${artist.slug}` },
+    description,
+    alternates: { canonical: absoluteUrl(routes.artist(artist.slug)) },
+    openGraph: {
+      title: `${artist.name} · ${SITE_NAME}`,
+      description,
+      url: absoluteUrl(routes.artist(artist.slug)),
+      siteName: SITE_NAME,
+      type: 'profile',
+    },
+    twitter: { card: 'summary_large_image', title: artist.name, description },
     robots: artist.isPlaceholder ? { index: false, follow: false } : undefined,
   };
 }
@@ -38,6 +49,7 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
   if (!artist) notFound();
 
   const works = repo.listArtworksByArtist(artist.slug);
+  const collector = repo.getCollector();
   const series = repo.listSeriesByArtist(artist.slug);
   const hasProse = Boolean(artist.biography || artist.artistStatement || artist.process);
 
@@ -56,6 +68,22 @@ export default async function ArtistPage({ params }: { params: Promise<{ slug: s
           {artist.verification === 'verified' ? ' · Verified artist' : ''}
         </p>
       </header>
+
+      {artist.whyInTheHouse ? (
+        /* Why this artist is collected — the collector speaking, clearly attributed. */
+        <section
+          className="hon-measure"
+          style={{ borderLeft: '1px solid var(--hon-brass-dim)', paddingLeft: 'var(--hon-space-5)' }}
+        >
+          <h2 className="hon-label" style={{ color: 'var(--hon-brass)' }}>
+            Why they’re in the House
+            <span className="hon-quiet"> — {collector.name}</span>
+          </h2>
+          <p className="hon-prose" style={{ marginTop: 'var(--hon-space-3)', color: 'var(--hon-bone)' }}>
+            {artist.whyInTheHouse}
+          </p>
+        </section>
+      ) : null}
 
       {/* ------------------------------------------------- IN THE HOUSE */}
       <section style={{ display: 'grid', gap: 'var(--hon-space-5)' }}>

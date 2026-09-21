@@ -3,6 +3,7 @@ import { Archivo, Instrument_Serif } from 'next/font/google';
 import { SiteFooter } from '@/components/chrome/SiteFooter';
 import { SiteHeader } from '@/components/chrome/SiteHeader';
 import { getRepository } from '@/data';
+import { absoluteUrl, COLLECTION_NAME, IS_PRODUCTION_MODE, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from '@/lib/site';
 import '@/styles/globals.css';
 
 /**
@@ -24,18 +25,30 @@ const text = Archivo({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://houseofnucci.example'),
+  /* Every relative URL in page metadata resolves against the canonical origin. */
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: 'House of Nucci — The Collection',
-    template: '%s · House of Nucci',
+    default: `${SITE_NAME} — The Collection`,
+    template: `%s · ${SITE_NAME}`,
   },
-  description:
-    'House of Nucci is a private collection of digital art, presented as a museum, an archive and a set of artist records.',
+  description: SITE_DESCRIPTION,
+  applicationName: SITE_NAME,
+  alternates: { canonical: '/' },
   openGraph: {
-    siteName: 'House of Nucci',
+    siteName: SITE_NAME,
+    title: `${SITE_NAME} — ${COLLECTION_NAME}`,
+    description: SITE_DESCRIPTION,
+    url: absoluteUrl('/'),
     type: 'website',
+    locale: 'en',
   },
-  robots: { index: true, follow: true },
+  twitter: {
+    card: 'summary_large_image',
+    title: `${SITE_NAME} — ${COLLECTION_NAME}`,
+    description: SITE_DESCRIPTION,
+  },
+  /* Only a production build is offered to search engines; staging carries demo records. */
+  robots: IS_PRODUCTION_MODE ? { index: true, follow: true } : { index: false, follow: false },
 };
 
 export const viewport: Viewport = {

@@ -13,6 +13,7 @@ collector ─< collection ─< artwork ─┬─< media_asset          (canonica
                                     ├─< provenance_event     (an object biography, with certainty per event)
                                     ├── acquisition          (separate from creation, private by default)
                                     ├── rights_record        (pessimistic by default)
+                                    ├── why_in_the_house     (column: the collector's own account)
                                     ├─< curatorial_note      (attributed interpretation)
                                     ├─< curatorial_relationship (explained recommendations)
                                     └─< verification_record
@@ -56,6 +57,13 @@ work is not owning its copyright (§30).
 
 **Media source decides eligibility.** `media_asset.source_kind` is checked so a
 `marketplace-thumbnail` can never be the `canonical` role (§46).
+
+**The collector has a voice of their own.** `artwork.why_in_the_house` and
+`artist.why_in_the_house` (migration `0002`) hold the collector's own account of why
+something is here. Deliberately separate from `curatorial_note`, which is the
+institution's voice: on a personal collection the collector's reason is the thing no
+marketplace can reproduce, and the interface attributes it to them by name. Optional, and
+usually absent (`POSITIONING.md`).
 
 **Honesty is required.** `artwork.is_placeholder` and `artist.is_placeholder` are
 `not null`. A record cannot omit whether it is real (§91).

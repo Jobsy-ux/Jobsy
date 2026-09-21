@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { ArtworkPlate } from '@/components/artwork/ArtworkPlate';
 import { getRepository } from '@/data';
+import { absoluteUrl, routes, SITE_NAME } from '@/lib/site';
 
 export function generateStaticParams() {
   return getRepository()
@@ -14,10 +15,20 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const exhibition = getRepository().getExhibition(slug);
   if (!exhibition) return { title: 'Not found' };
+  const description = exhibition.subtitle ?? exhibition.curatorialStatement.slice(0, 180);
+
   return {
     title: exhibition.title,
-    description: exhibition.subtitle ?? exhibition.curatorialStatement.slice(0, 180),
-    alternates: { canonical: `/exhibition/${exhibition.slug}` },
+    description,
+    alternates: { canonical: absoluteUrl(routes.exhibition(exhibition.slug)) },
+    openGraph: {
+      title: `${exhibition.title} · ${SITE_NAME}`,
+      description,
+      url: absoluteUrl(routes.exhibition(exhibition.slug)),
+      siteName: SITE_NAME,
+      type: 'article',
+      images: exhibition.coverImageUrl ? [{ url: exhibition.coverImageUrl }] : undefined,
+    },
   };
 }
 

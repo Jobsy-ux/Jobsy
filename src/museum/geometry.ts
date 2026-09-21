@@ -125,7 +125,7 @@ export function hangWork(
 
 /**
  * How far back to stand. Roughly the diagonal of the work, clamped — the distance a
- * person naturally chooses, not a fixed number that puts a monumental work out of frame.
+ * person naturally chooses, not a fixed number that puts a large work out of frame.
  */
 export function viewingDistance(width: number, height: number): number {
   return Math.min(7.5, Math.max(1.6, Math.hypot(width, height) * 0.95));

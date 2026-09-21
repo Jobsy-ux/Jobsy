@@ -25,6 +25,47 @@ as though House of Nucci owns them. **This distinction is absolute.**
 
 ---
 
+## AMENDMENTS
+
+Recorded by the owner after the original brief. These take precedence over the sections
+below wherever they differ.
+
+### A-1 — Canonical domain (2026-09-21)
+
+The production domain is **https://houseofnucci.art**. It is canonical for URL
+configuration, SEO and OpenGraph metadata, the sitemap, robots, absolute entity URLs,
+social sharing and deployment documentation. The public URL structure is `/`, `/museum`,
+`/collection`, `/artwork/[slug]`, `/artist/[slug]`, `/series/[slug]`,
+`/exhibition/[slug]`, `/pathway/[slug]`.
+
+DNS, registrar and CDN records are **not** to be configured until the owner explicitly
+asks. Development and staging continue on local and preview URLs.
+
+### A-2 — Positioning and scale (2026-09-21)
+
+The House of Nucci Collection is a **highly curated personal collection** of a little
+under 200 works. It is not one of the world's largest digital art collections, not a whale
+collection, not encyclopedic, and not defined by trophy-level monumental 1/1 acquisitions.
+The House never exaggerates its scale, financial value, historical importance, rarity or
+cultural authority.
+
+Its strength is thoughtful personal curation, the collector's point of view, genuine
+enthusiasm for the artists, the relationships between works, artist context, provenance,
+discovery, storytelling, excellent digital presentation and an exceptional visitor
+experience.
+
+This amends the register of §04 and §11: where the original brief reaches for monumental
+scale, the architecture is instead **sophisticated, memorable and appropriately intimate**
+— meaningful rooms, strong sightlines and breathing room, sized for roughly 200 works
+rather than enormous spaces that imply collection size or wealth. Monumental treatment, a
+1/1 room or a rare-work designation are used only where the actual collection data
+supports them.
+
+Full detail, including the language the House does not use, is in `POSITIONING.md`, which
+governs copy and architectural scale.
+
+---
+
 ## 01 — THE NORTH STAR
 
 The ultimate experience answers this question:

@@ -89,7 +89,9 @@ export const artworks: ArtworkInput[] = [
     mediaType: 'still',
     medium: 'Generated still image (demo placeholder)',
     description:
-      'Demo record. A 3:2 placeholder composition of stratified horizontal fields, generated to test monumental wall presentation and the still-image renderer.',
+      'Demo record. A 3:2 placeholder composition of stratified horizontal fields, generated to test wall presentation and the still-image renderer.',
+    whyInTheHouse:
+      'Demo text, in the position the collector\u2019s own account will occupy. On a real record this is where the collector says why a work is here \u2014 what they noticed, when they saw it, what it sits next to \u2014 in their voice, and only when they have something to say.',
     notes: [
       {
         kind: 'curatorial-context',
@@ -159,7 +161,7 @@ export const artworks: ArtworkInput[] = [
     mediaType: 'still',
     medium: 'Generated still image (demo placeholder)',
     description:
-      'Demo record. An ultrawide 64:27 placeholder composition, used to test a work given an entire wall at monumental scale.',
+      'Demo record. An ultrawide 64:27 placeholder composition, used to test a work given a whole wall to itself.',
     media: still('still-strata-cobalt.png', 2560, 1080, {
       thumb: 'still-strata-cobalt--thumb.png',
       thumbWidth: 768,
@@ -331,6 +333,8 @@ export const artworks: ArtworkInput[] = [
     medium: 'Animated GIF, 3 second loop (demo placeholder)',
     description:
       'Demo record. A 36-frame animated placeholder, used to verify that looping work animates on the wall rather than appearing as a still.',
+    whyInTheHouse:
+      'Demo text. A second example, so the layout can be reviewed with the field present on some works and absent on most \u2014 which is how it will actually be used.',
     media: {
       canonical: {
         id: 'media-drift-gif',

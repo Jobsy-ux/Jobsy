@@ -3,6 +3,22 @@
 `src/museum/`. Next.js + React Three Fiber + Three.js, loaded only on `/museum` and only
 in the browser.
 
+## Scale
+
+The building is sized for a personal collection of a little under 200 works
+(`POSITIONING.md`). Current rooms:
+
+| Room | Size (m) | Works | Why this size |
+|---|---|---|---|
+| The Entry | 16 × 8 × 12 | 2 | An arrival with a lift to it, not a lobby |
+| The Great Room | 20 × 8.5 × 24 | 9 | A long sightline with light around each work, crossable in a few seconds |
+| The Black Box | 14 × 6 × 12 | 2 | Dark and close, so a moving work is the only bright thing |
+
+Rooms are deliberately not larger. A hall that reads as empty implies a collection that
+should have filled it, and vastness is a claim about scale the House does not make. A work
+gets a whole wall because of what it is — the widest hang is 7 m, for a 64:27 work that
+needs the run — never to suggest the House owns trophies.
+
 ## Model
 
 Rooms are **authored data**, not procedural output (`content/rooms.ts`, later the `room`

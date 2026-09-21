@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { ArtworkMedia } from '@/components/artwork/ArtworkMedia';
 import { getRepository } from '@/data';
 import { displayTitle } from '@/domain';
+import { absoluteUrl, routes, SITE_NAME } from '@/lib/site';
 
 export function generateStaticParams() {
   return getRepository()
@@ -15,10 +16,19 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const pathway = getRepository().getPathway(slug);
   if (!pathway) return { title: 'Not found' };
+  const description = pathway.subtitle ?? pathway.introduction.slice(0, 180);
+
   return {
     title: pathway.title,
-    description: pathway.subtitle ?? pathway.introduction.slice(0, 180),
-    alternates: { canonical: `/pathway/${pathway.slug}` },
+    description,
+    alternates: { canonical: absoluteUrl(routes.pathway(pathway.slug)) },
+    openGraph: {
+      title: `${pathway.title} · ${SITE_NAME}`,
+      description,
+      url: absoluteUrl(routes.pathway(pathway.slug)),
+      siteName: SITE_NAME,
+      type: 'article',
+    },
   };
 }
 

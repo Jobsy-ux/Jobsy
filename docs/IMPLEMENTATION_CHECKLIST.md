@@ -5,6 +5,16 @@ it is how progress survives across sessions.
 
 Legend: `[x]` done · `[~]` partial · `[ ]` not started · `[!]` blocked on owner input
 
+## Recorded decisions (owner)
+- [x] **Canonical domain: `houseofnucci.art`** — wired through `src/lib/site.ts`, canonical
+      tags, sitemap, robots, OpenGraph, social cards, `.env.example` and the deployment
+      docs. DNS/registrar/CDN deliberately **not** configured (awaiting the owner's word).
+- [x] **Positioning: a highly curated personal collection** — `docs/POSITIONING.md` is
+      canonical for copy and architectural scale; recorded as amendment A-2 in the master
+      specification.
+- [x] Museum rescaled for ~200 works (Great Room 20 × 8.5 × 24 m; widest hang 7 m)
+- [x] `why_in_the_house` added to artwork and artist, surfaced in all three views
+
 ## Phase 0 — Architecture
 - [x] Inspect repository (empty; greenfield)
 - [x] Master specification stored (`HOUSE_OF_NUCCI_MASTER_SPEC.md`)
@@ -47,7 +57,8 @@ Legend: `[x]` done · `[~]` partial · `[ ]` not started · `[!]` blocked on own
 - [x] Provenance as object biography
 - [x] External marketplace handoff
 - [x] Deep links + VIEW IN MUSEUM transport
-- [x] SEO: metadata, OpenGraph, sitemap, robots, structured data
+- [x] SEO: metadata, OpenGraph, sitemap, robots, absolute entity URLs on the canonical domain
+- [x] Composed artwork social cards (`opengraph-image`)
 
 ## Phase 4 — Artist Passports
 - [x] Artist passport page with hard IN THE HOUSE / EXPLORE THE ARTIST separation

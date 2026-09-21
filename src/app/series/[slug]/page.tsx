@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { ArtworkPlate } from '@/components/artwork/ArtworkPlate';
 import { ExternalLink } from '@/components/primitives/ExternalLink';
 import { getRepository } from '@/data';
+import { absoluteUrl, routes, SITE_NAME } from '@/lib/site';
 
 export function generateStaticParams() {
   return getRepository()
@@ -15,10 +16,19 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const series = getRepository().getSeries(slug);
   if (!series) return { title: 'Not found' };
+  const description = series.description ?? `${series.title} in the House of Nucci Collection.`;
+
   return {
     title: series.title,
-    description: series.description ?? `${series.title} in the House of Nucci Collection.`,
-    alternates: { canonical: `/series/${series.slug}` },
+    description,
+    alternates: { canonical: absoluteUrl(routes.series(series.slug)) },
+    openGraph: {
+      title: `${series.title} · ${SITE_NAME}`,
+      description,
+      url: absoluteUrl(routes.series(series.slug)),
+      siteName: SITE_NAME,
+      type: 'article',
+    },
     robots: series.isPlaceholder ? { index: false, follow: false } : undefined,
   };
 }

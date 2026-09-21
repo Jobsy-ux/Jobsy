@@ -2,11 +2,22 @@ import type { Metadata } from 'next';
 import { CollectionBrowser } from '@/components/collection/CollectionBrowser';
 import { DemoNotice } from '@/components/primitives/DemoMarker';
 import { getRepository } from '@/data';
+import { absoluteUrl, routes, SITE_NAME } from '@/lib/site';
+
+const DESCRIPTION =
+  'Every work in the House of Nucci Collection, with its artist, series, year and record.';
 
 export const metadata: Metadata = {
   title: 'The Collection',
-  description:
-    'Every work in the House of Nucci Collection, with its artist, series, year and record.',
+  description: DESCRIPTION,
+  alternates: { canonical: absoluteUrl(routes.collection()) },
+  openGraph: {
+    title: `The Collection · ${SITE_NAME}`,
+    description: DESCRIPTION,
+    url: absoluteUrl(routes.collection()),
+    siteName: SITE_NAME,
+    type: 'website',
+  },
 };
 
 /**
@@ -24,7 +35,8 @@ export default function CollectionPage() {
         <h1 className="hon-display">The Collection</h1>
         <p className="hon-prose hon-measure">
           Everything the House holds, in one place. Each work has a record: who made it,
-          when, in what medium, and how it came to be here.
+          when, in what medium, how it came to be here — and, sometimes, why it was
+          chosen.
         </p>
         {repo.hasPlaceholders() ? (
           <div className="hon-measure">

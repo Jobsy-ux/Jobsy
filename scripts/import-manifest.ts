@@ -13,6 +13,7 @@
  *   · a marketplace thumbnail is recorded as a thumbnail, never as canonical media (§46)
  *   · rights default to not-established regardless of what a provider claims (§30)
  *   · `is_placeholder` must be stated explicitly, true or false (§91)
+ *   · `why_in_the_house` is carried verbatim or left empty — it is the collector's voice
  */
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
@@ -80,6 +81,9 @@ function toArtwork(row: Record<string, string>): ArtworkInput {
     medium: row.medium ?? '',
     editionLabel: row.edition_label || null,
     description: row.description || null,
+    /* The collector's own words, carried across verbatim or left empty. Never generated,
+       never summarised from a description (docs/POSITIONING.md). */
+    whyInTheHouse: row.why_in_the_house || null,
     media: {
       canonical: {
         id: `media-${row.slug}-canonical`,

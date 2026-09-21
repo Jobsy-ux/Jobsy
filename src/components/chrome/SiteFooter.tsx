@@ -41,7 +41,7 @@ export function SiteFooter({ isDemo }: { isDemo: boolean }) {
           <p className="hon-prose" style={{ marginTop: 'var(--hon-space-3)', fontSize: 'var(--hon-size-small)' }}>
             {isDemo
               ? 'This build is populated with clearly marked demo records. No work shown is part of the collection.'
-              : 'Works shown are held in the House of Nucci Collection. External links lead to artists and marketplaces; the House does not sell work.'}
+              : 'A personal collection, presented as a museum. Works shown are held in the House of Nucci Collection; external links lead to artists and marketplaces, and the House does not sell work.'}
           </p>
         </div>
       </div>

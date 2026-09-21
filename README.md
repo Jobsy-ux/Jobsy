@@ -1,8 +1,12 @@
 # House of Nucci
 
-**The House of Nucci Collection** — a private collection of digital art, built as an
-institution: a museum you can walk through, an archive that stands on its own, artist
-records that outlive marketplace pages, and a cultural record the House owns outright.
+**The House of Nucci Collection** — a highly curated personal collection of digital art,
+presented as an immersive digital museum experience: a museum you can walk through, an
+archive that stands on its own, artist records that outlive marketplace pages, and a
+cultural record the House owns outright.
+
+Canonical production domain: **https://houseofnucci.art** (DNS and hosting are not
+configured yet — see `docs/DECISIONS.md`, D-21).
 
 > **This build contains demo records only.** Every work, artist and provenance entry
 > currently in the repository is a clearly marked placeholder with generated abstract
@@ -15,6 +19,7 @@ records that outlive marketplace pages, and a cultural record the House owns out
 | Document | What it covers |
 |---|---|
 | `docs/HOUSE_OF_NUCCI_MASTER_SPEC.md` | The canonical specification. It wins over any code or document that contradicts it. |
+| `docs/POSITIONING.md` | What the House claims and what it never claims — governs copy and the scale of the architecture |
 | `docs/BLUEPRINT.md` | Stack, structure, schema, slice scope, risks, decisions |
 | `docs/DECISIONS.md` | What was decided without asking, and what needs the owner |
 | `docs/IMPLEMENTATION_CHECKLIST.md` | Running state of the build, updated with the work |
@@ -53,9 +58,9 @@ supabase/    canonical PostgreSQL schema
 ## Two ways in
 
 **Enter the Museum** — a first-person walk through the Entry, the Great Room and the Black
-Box, with works hung at curated scale, lit as a gallery lights them, and moving work that
-actually moves. Falls back through optimised, guided and archive-only tiers so no device
-is punished.
+Box: rooms sized for a personal collection, with works hung at curated scale, lit as a
+gallery lights them, and moving work that actually moves. Falls back through optimised,
+guided and archive-only tiers so no device is punished.
 
 **Explore the Collection** — the archive: instant search, filters, artwork passports with
 provenance as a biography, artist passports that separate what the House owns from the
@@ -67,8 +72,8 @@ without WebGL, without an account, and without a wallet.
 Artwork is never altered — not cropped, recoloured, reshaped, re-encoded or smoothed.
 Nothing external is ever presented as owned by the House. Nothing is fabricated: no
 biography, no provenance, no ownership. Rights are never inferred from possession. The
-House's own record is the source of truth, and the museum opens whether or not any
-marketplace is reachable.
+House never overstates its own scale, value or importance. The House's own record is the
+source of truth, and the museum opens whether or not any marketplace is reachable.
 
 Where those rules could be broken by accident, they are enforced in code — see the table
 in `docs/architecture.md`.

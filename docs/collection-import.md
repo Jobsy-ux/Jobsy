@@ -44,6 +44,7 @@ Notes on the columns that matter most:
 | `is_placeholder` | Required, explicitly `true` or `false`. A record cannot omit its own honesty (§91). |
 | `visibility` | Imports land as `draft`. Publishing is a decision, not a side effect (§87). |
 | `rights_status` | Ignored on import: rights start at `not-established` until a human establishes them (§30). |
+| `why_in_the_house` | The collector's own words, carried across verbatim or left empty. Never generated, never summarised from the description — it is a point of view, not a claim of importance (`POSITIONING.md`). |
 | provenance | Has no column. Each event needs its own evidence and certainty, so provenance is entered deliberately, never generated (§28, §104). |
 
 ## Media

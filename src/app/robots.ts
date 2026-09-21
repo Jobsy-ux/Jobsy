@@ -1,15 +1,14 @@
 import type { MetadataRoute } from 'next';
-
-const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://houseofnucci.example';
+import { absoluteUrl, IS_PRODUCTION_MODE } from '@/lib/site';
 
 export default function robots(): MetadataRoute.Robots {
-  /* Staging is never indexed while it carries demo records (DECISIONS.md O-7). */
-  const isProduction = process.env.COLLECTION_MODE === 'production';
-
+  /* Only a production build — which by definition carries no demo records — is offered
+     to search engines. Staging stays closed while placeholders exist (DECISIONS.md O-7). */
   return {
-    rules: isProduction
+    rules: IS_PRODUCTION_MODE
       ? { userAgent: '*', allow: '/', disallow: ['/admin', '/my-house'] }
       : { userAgent: '*', disallow: '/' },
-    sitemap: `${BASE}/sitemap.xml`,
+    sitemap: absoluteUrl('/sitemap.xml'),
+    host: absoluteUrl('/'),
   };
 }

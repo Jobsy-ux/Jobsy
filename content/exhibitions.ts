@@ -13,7 +13,7 @@ export const exhibitions: ExhibitionInput[] = [
     title: 'First Light',
     subtitle: 'The opening arrangement of the demo build',
     curatorialStatement:
-      'Demo exhibition. First Light gathers the placeholder records used to build and review the House — a monumental still on the long west wall, a pair of small pixel studies that reward standing close, and a silent loop held apart in the Black Box. It exists to test how an exhibition reads: a statement, an order, and a route through the rooms. When the collection arrives, this arrangement is replaced by a real one.',
+      'Demo exhibition. First Light gathers the placeholder records used to build and review the House — a wide still given the long west wall, a pair of small pixel studies that reward standing close, and a silent loop held apart in the Black Box. It exists to test how an exhibition reads: a statement, an order, and a route through the rooms. When the collection arrives, this arrangement is replaced by a real one.',
     essay: null,
     heroArtworkSlug: 'strata-cobalt',
     artworkSlugs: [

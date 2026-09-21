@@ -150,3 +150,39 @@ distance, so a room this size needs intensities in the hundreds; lamps are space
 room's long axis rather than hung as one bulb in the middle. Artwork is rendered unlit and
 outside tone mapping, so gallery light falls on the wall and the frame and never on the
 work's pixels (§14, §66).
+
+---
+
+## Decisions taken after the domain and positioning updates
+
+**D-21 — houseofnucci.art is canonical, in exactly one place.** `src/lib/site.ts` holds
+the origin, the site name, the description and every route spelling; canonical tags, the
+sitemap, robots, OpenGraph and social cards all resolve through it. Three copies of
+`process.env.NEXT_PUBLIC_SITE_URL ?? '…'` became one, so the domain cannot drift out of
+step with itself. `NEXT_PUBLIC_SITE_URL` still overrides for local and preview builds, and
+a malformed override falls back to the canonical origin rather than emitting broken
+canonical tags on every page. **No DNS, registrar or CDN configuration has been done**, per
+the owner's instruction (see O-1, now partly answered: the domain is settled, the
+repository question is not).
+
+**D-22 — The architecture is sized for the collection that exists.** The room programme
+was rescaled: the Great Room from 26 × 11 × 30 m to 20 × 8.5 × 24 m, the Entry from
+18 × 9 × 14 to 16 × 8 × 12, the Black Box from 16 × 7 × 14 to 14 × 6 × 12, and the widest
+hang from 9 m to 7 m. Nothing was re-architected — the rooms, walls, placements and guided
+stops are the same records with different numbers, and the validator and tests caught the
+knock-on effects. The result is a room where nine works read together with light around
+each, rather than a hall whose emptiness would imply a collection that should have filled
+it (`POSITIONING.md`).
+
+**D-23 — `why_in_the_house` is a first-class field, not another note.** Added to `artwork`
+and `artist` in the schema and in migration `0002`, surfaced on the artwork page, the
+artist passport and the in-museum record, always attributed to the collector by name and
+set apart with a brass rule. It is distinct from `curatorial_note`, which is the
+institution's voice; this is the collector's. It is optional and usually absent — the
+importer carries it verbatim or leaves it empty, and nothing generates or infers it (§104).
+
+**D-24 — Artwork social cards are composed, not cropped.** `/artwork/[slug]/opengraph-image`
+renders the work whole on a dark ground with its title, artist and the collection's name.
+Handing a platform a bare image invites it to crop the work to its own aspect ratio;
+composing the card is what keeps the work intact (§14, §57). Cards are built at build
+time, so local media is read from disk and inlined.
