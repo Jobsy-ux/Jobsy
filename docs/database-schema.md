@@ -55,6 +55,12 @@ precision is worse than a coarse date. Unknown history is absent, never filled i
 constraint forbids `high_res_rehosting_allowed` while rights are unestablished. Owning a
 work is not owning its copyright (§30).
 
+**Publication needs a basis, and the basis needs evidence.** Migration `0003` adds
+`publication_basis` (`not-established` by default), plus who granted permission, when it
+was recorded and where the evidence lives. Check constraints refuse a licence basis with no
+licence URL, a permission basis with no grantor or date, and high-resolution re-hosting
+with no basis at all. See `docs/rights.md`.
+
 **Media source decides eligibility.** `media_asset.source_kind` is checked so a
 `marketplace-thumbnail` can never be the `canonical` role (§46).
 

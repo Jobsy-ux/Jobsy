@@ -1,4 +1,14 @@
-import { aspectRatio, isOwnedWorkLink, type Artwork } from '@/domain';
+import {
+  aspectRatio,
+  hasPublicationBasis,
+  isOwnedWorkLink,
+  isPubliclyServed,
+  longestEdge,
+  mayPublishHighResolution,
+  mayServePublicly,
+  PUBLIC_DISPLAY_MAX_EDGE,
+  type Artwork,
+} from '@/domain';
 import type { CollectionRepository } from './repository';
 
 export interface ValidationIssue {
@@ -203,6 +213,89 @@ export function validateCollection(
         'rights-contradiction',
         artwork.slug,
         'High-resolution re-hosting is enabled while display rights are not established (§30).',
+      );
+    }
+
+    /* ---------------------------------------------- publication and originals */
+
+    const rights = artwork.rights;
+
+    if (rights.publicationBasis === 'verified-license' && !rights.licenseUrl) {
+      error(
+        'licence-missing',
+        artwork.slug,
+        'Publication basis is a verified licence, but no licence URL is recorded. A licence nobody can read is not a licence (docs/rights.md).',
+      );
+    }
+
+    if (
+      rights.publicationBasis === 'explicit-permission' &&
+      (!rights.permissionGrantedBy || !rights.permissionRecordedOn)
+    ) {
+      error(
+        'permission-unattributed',
+        artwork.slug,
+        'Publication basis is explicit permission, but who granted it and when it was recorded are not both present.',
+      );
+    }
+
+    if (rights.highResRehostingAllowed && !hasPublicationBasis(artwork)) {
+      error(
+        'rights-contradiction',
+        artwork.slug,
+        'High-resolution re-hosting is enabled with no publication basis at all. Ownership is not a basis (§30).',
+      );
+    }
+
+    /* An archival original is preservation, not delivery: it must not sit in the public
+       directory, where it is by definition downloadable (§47, docs/rights.md). */
+    const archival = artwork.media.archivalOriginal;
+    if (archival && isPubliclyServed(archival)) {
+      error(
+        'original-public',
+        artwork.slug,
+        'The archival original is served from the public directory. Originals are held for preservation and must not be public assets.',
+      );
+    }
+
+    /* Anything the site actually serves has to be within the display cap unless someone
+       has explicitly permitted high resolution. */
+    for (const [role, asset] of [
+      ['canonical', artwork.media.canonical],
+      ['web', artwork.media.web],
+      ['thumbnail', artwork.media.thumbnail],
+      ['poster', artwork.media.poster],
+    ] as const) {
+      if (!asset || !isPubliclyServed(asset)) continue;
+      if (mayServePublicly(artwork, asset)) continue;
+
+      const edge = longestEdge(asset);
+      error(
+        'public-original',
+        artwork.slug,
+        edge === null
+          ? `The ${role} asset is served publicly but has no recorded dimensions, so it cannot be shown to be a viewing copy rather than an original.`
+          : `The ${role} asset is ${edge}px on its longest edge, above the ${PUBLIC_DISPLAY_MAX_EDGE}px public display cap, and high-resolution re-hosting has not been permitted. Serve a derivative, or record the permission (docs/rights.md).`,
+      );
+    }
+
+    if (artwork.state === 'published' && !hasPublicationBasis(artwork)) {
+      const message =
+        'Published with no publication basis recorded. A work is shown because someone established that it may be — never because the House holds the token (§30).';
+      /* A gap to close before launch in development; a blocker in production. */
+      if (mode === 'production') error('no-publication-basis', artwork.slug, message);
+      else warn('no-publication-basis', artwork.slug, message);
+    }
+
+    if (
+      mayPublishHighResolution(artwork) &&
+      !artwork.media.web &&
+      artwork.rights.publicationBasis !== 'owner-created'
+    ) {
+      warn(
+        'no-viewing-copy',
+        artwork.slug,
+        'High-resolution re-hosting is permitted but no web derivative exists, so every visitor is served the full-size file.',
       );
     }
   }

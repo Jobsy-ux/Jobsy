@@ -81,23 +81,32 @@ left as folklore (§104: no undocumented dependency decisions).
 These change identity, fidelity, ownership representation, legal rights or architecture.
 Work continues around them; none of them block the vertical slice.
 
-**O-1 — Repository and project naming.** This code lives in a repository named `Jobsy`.
-The package is `house-of-nucci`. Confirm whether House of Nucci should move to its own
-repository, and confirm the production domain.
+**O-1 — RESOLVED (2026-09-21).** The production domain is `houseofnucci.art`, wired
+through `src/lib/site.ts` (D-21). House of Nucci moves to its own dedicated repository,
+with history preserved. The move is prepared but **not executed**: creating a repository
+needs a permission this session's GitHub App does not have. See `REPOSITORY_MOVE.md` for
+the one command it takes, and for the two ways to unblock the automated path.
 
-**O-2 — The actual collection export.** Needed to replace every demo record: a manifest
-(CSV/JSON in the §44 field shape), the wallet addresses that hold the works, and the
-owner-supplied original media where it exists. Until this arrives, the museum is
-architecturally complete and culturally empty.
+**O-2 — NARROWED (2026-09-21).** The next milestone is **not** the full collection: it is
+a 12–20 work real vertical slice. Placeholder infrastructure stays intact until the owner
+supplies the artwork, media and metadata. `collection-intake.md` says exactly what to send
+and what happens when it lands; `npm run prepare:media` already reads a folder of supplied
+media and reports dimensions, checksums and the decisions a person has to make.
 
 **O-3 — Which wallets are in scope, and which works in them are in the collection.**
 Per §43 the wallet is not the collection. A per-work include/exclude decision is the
 owner's, not the software's.
 
-**O-4 — Artist permission posture.** Does the House intend to contact represented artists
-for statements, process material and verified links (§25), and may the House re-host
-high-resolution media? Rights records stay "not established" until answered, which limits
-derivative quality.
+**O-4 — CONFIRMED (2026-09-21).** The conservative posture stands and is not to be
+relaxed without the owner saying so: token ownership stays separate from copyright,
+`not-established` remains the default, no display, derivative, commercial or re-hosting
+right is inferred from ownership, and high-resolution originals are not public downloads.
+Publication now requires a recorded basis — explicit permission or a verified licence —
+with evidence. Implemented in D-25; `rights.md` is canonical.
+
+Still open within it: whether the House will approach represented artists for statements,
+process material and verified links (§25). Worth doing on its own terms — that
+conversation is usually also the one that produces permission.
 
 **O-5 — Acquisition disclosure policy.** §51 separates creation from acquisition date.
 Some collectors publish acquisition dates and sources; some consider them private. Public
@@ -186,3 +195,28 @@ renders the work whole on a dark ground with its title, artist and the collectio
 Handing a platform a bare image invites it to crop the work to its own aspect ratio;
 composing the card is what keeps the work intact (§14, §57). Cards are built at build
 time, so local media is read from disk and inlined.
+
+---
+
+## Decisions taken for the rights posture and the intake path
+
+**D-25 — Publication requires a basis, and the basis requires evidence.** `rights_record`
+gained `publication_basis` (`not-established` by default), who granted permission, when it
+was recorded, and where the evidence lives — in the schema, in migration `0003`, and in the
+details panel. A licence basis with no licence URL, a permission basis with no attributable
+grantor and date, or high-resolution re-hosting with no basis at all are validation errors
+and SQL check violations. Publishing without a basis warns in development and **fails the
+production build**: deliberate friction at exactly the moment "we own it" is tempting.
+
+**D-26 — Originals are not public assets.** Anything served from the public directory is
+capped at 2048px on the longest edge unless high resolution has been explicitly permitted;
+an asset with unknown dimensions counts as unknown risk, not permission; and an archival
+original in the public directory is an error. The generated placeholder media is the one
+exception, recorded in the data as `owner-created` rather than hidden in a comment, because
+the House genuinely made those files.
+
+**D-27 — Intake is prepared before the assets arrive.** `npm run prepare:media` inspects a
+folder of supplied media and reports true dimensions, duration, audio and SHA-256 per file,
+flagging anything above the public cap, anything unreadable, and time-based work missing a
+poster. It reads and reports; it imports nothing. Verified against the demo media, where it
+correctly flagged the two files above the cap.

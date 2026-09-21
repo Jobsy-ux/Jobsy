@@ -35,7 +35,9 @@ allows — not repeated as a convention in twelve components.
 | Moving work actually moves (§16) | `museum/media/media-director` + the renderer registry; `validate` warns on a missing poster |
 | Nothing external is presented as owned (§06, §26) | `MarketplaceLink.refersTo` in the schema, `ownedWorkLinks` / `externalPracticeLinks`, and a hard section break in the artist and artwork pages |
 | A relation points only at works the House holds | `validate.missing-relation`, and a foreign key in SQL |
-| Rights are never assumed (§30) | `RightsRecordSchema` defaults, `mayPublishHighResolution`, a SQL check constraint |
+| Rights are never assumed (§30) | `RightsRecordSchema` defaults, `mayPublishHighResolution`, SQL check constraints |
+| Originals never become public downloads (O-4) | `mayServePublicly` + `PUBLIC_DISPLAY_MAX_EDGE`, and `public-original` / `original-public` validation |
+| Publishing requires a recorded basis (O-4) | `hasPublicationBasis`; a warning in development, a build failure in production |
 | Provenance is never invented (§28) | `ProvenanceEvent.certainty` is required; the UI labels anything not `documented` |
 | Demo records are never mistaken for real ones (§91) | `isPlaceholder` is a required field, visible markers, sitemap exclusion, a production-mode build gate |
 | Untrusted metadata cannot become an href (§72) | `ExternalUrl` in the schema, `lib/url.safeExternalUrl`, and one `<ExternalLink>` primitive |

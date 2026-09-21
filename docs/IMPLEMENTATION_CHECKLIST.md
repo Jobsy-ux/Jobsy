@@ -6,6 +6,14 @@ it is how progress survives across sessions.
 Legend: `[x]` done · `[~]` partial · `[ ]` not started · `[!]` blocked on owner input
 
 ## Recorded decisions (owner)
+- [x] **O-1 resolved** — House of Nucci gets its own repository, history preserved.
+      Prepared in `REPOSITORY_MOVE.md`; **blocked** on repository creation permission.
+- [x] **O-2 narrowed** — next milestone is a 12–20 work real slice, not the full
+      collection. Placeholder infrastructure stays until assets arrive
+      (`collection-intake.md`).
+- [x] **O-4 confirmed** — conservative rights posture retained and hardened
+      (`rights.md`): publication basis with evidence, 2048px public display cap,
+      originals never public.
 - [x] **Canonical domain: `houseofnucci.art`** — wired through `src/lib/site.ts`, canonical
       tags, sitemap, robots, OpenGraph, social cards, `.env.example` and the deployment
       docs. DNS/registrar/CDN deliberately **not** configured (awaiting the owner's word).
@@ -86,8 +94,18 @@ Legend: `[x]` done · `[~]` partial · `[ ]` not started · `[!]` blocked on own
 - [ ] Contextual GO DEEPER surfaces
 - [ ] Source citation UI
 
-## Phase 8 — Full collection ingestion
-- [!] Blocked on O-2 (real collection export) and O-3 (wallet scope)
+## Phase 8 — Collection ingestion
+### Next milestone: the 12–20 work real slice (O-2)
+- [x] Intake specification (`collection-intake.md`)
+- [x] Media inspector (`npm run prepare:media`) — dimensions, duration, audio, checksums
+- [x] Manifest importer, staging-only, verified end to end
+- [x] Rights gate: basis + evidence + public display cap
+- [ ] Receive media and metadata for 12–20 works (**owner**)
+- [ ] Produce derivatives; enter provenance and rights by hand
+- [ ] Place the works — room, wall, scale, frame, lighting (curatorial pass)
+- [ ] Delete placeholder records wholesale; production validation passes
+### Then, and only then
+- [ ] Full collection ingestion — blocked on O-3 (wallet scope) as well
 
 ## Phase 9 — Optimization / QA / launch
 - [ ] Performance budgets enforced in CI (budgets defined in `performance.md`)

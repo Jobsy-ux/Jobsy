@@ -85,6 +85,68 @@ export function mayPublishHighResolution(artwork: Artwork): boolean {
   );
 }
 
+/**
+ * The longest edge, in pixels, that may be served publicly without an explicit
+ * high-resolution permission.
+ *
+ * Big enough that the work reads properly on a large screen; small enough that the file
+ * on the House's servers is a viewing copy rather than a distributable original
+ * (docs/rights.md).
+ */
+export const PUBLIC_DISPLAY_MAX_EDGE = 2048;
+
+export function longestEdge(asset: Pick<MediaAsset, 'width' | 'height'>): number | null {
+  if (!asset.width || !asset.height) return null;
+  return Math.max(asset.width, asset.height);
+}
+
+/**
+ * Whether this particular file may be served to the public.
+ *
+ * A file above the display cap is an original, and originals are not public assets unless
+ * someone has explicitly permitted it. Ownership is never that permission.
+ */
+export function mayServePublicly(artwork: Artwork, asset: MediaAsset): boolean {
+  if (mayPublishHighResolution(artwork)) return true;
+  const edge = longestEdge(asset);
+  /* Unknown dimensions are treated as unknown risk, not as permission. */
+  if (edge === null) return false;
+  return edge <= PUBLIC_DISPLAY_MAX_EDGE;
+}
+
+/**
+ * Has anyone established that this work may be shown at all? Token ownership is not a
+ * basis and never appears in this answer (§30).
+ */
+export function hasPublicationBasis(artwork: Artwork): boolean {
+  return artwork.rights.publicationBasis !== 'not-established';
+}
+
+/** Human-readable account of the basis, for the details panel. Never overstated. */
+export function publicationBasisLabel(artwork: Artwork): string {
+  switch (artwork.rights.publicationBasis) {
+    case 'explicit-permission':
+      return artwork.rights.permissionGrantedBy
+        ? `Shown with permission from ${artwork.rights.permissionGrantedBy}`
+        : 'Shown with recorded permission';
+    case 'verified-license':
+      return 'Shown under a verified licence';
+    case 'owner-created':
+      return 'Asset created by House of Nucci';
+    case 'not-established':
+    default:
+      return 'Publication basis not yet established';
+  }
+}
+
+/**
+ * An archival original is held for preservation, not for delivery (§47). Anything served
+ * from the public directory is, by definition, downloadable.
+ */
+export function isPubliclyServed(asset: Pick<MediaAsset, 'url'>): boolean {
+  return asset.url.startsWith('/');
+}
+
 /** Title as shown, without inventing one. */
 export function displayTitle(artwork: Artwork): string {
   return artwork.displayTitle ?? artwork.title;

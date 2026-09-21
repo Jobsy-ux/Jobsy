@@ -1,4 +1,4 @@
-import { isAcquisitionPublic, type Artwork } from '@/domain';
+import { isAcquisitionPublic, publicationBasisLabel, type Artwork } from '@/domain';
 
 /**
  * PROVENANCE + DETAILS (§21, §29). Technical facts live here rather than in the reading
@@ -48,6 +48,12 @@ export function RecordDetails({ artwork }: { artwork: Artwork }) {
       : artwork.rights.displayRightsStatus,
   ]);
   if (artwork.rights.copyrightOwner) rows.push(['Copyright', artwork.rights.copyrightOwner]);
+  /* Why this work is shown here at all. Stated plainly, including when the answer is
+     "nobody has established that yet" (§29, docs/rights.md). */
+  rows.push(['Shown on the basis of', publicationBasisLabel(artwork)]);
+  if (artwork.rights.permissionRecordedOn) {
+    rows.push(['Permission recorded', artwork.rights.permissionRecordedOn]);
+  }
 
   return (
     <dl style={{ display: 'grid', gap: 0, margin: 0 }}>

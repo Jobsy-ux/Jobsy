@@ -15,7 +15,8 @@
     "check": "npm run typecheck && npm run lint && npm run test && npm run validate:collection",
     "import:manifest": "tsx scripts/import-manifest.ts",
     "generate:placeholders": "node scripts/generate-placeholder-media.mjs",
-    "smoke": "node scripts/smoke.mjs"
+    "smoke": "node scripts/smoke.mjs",
+    "prepare:media": "tsx scripts/prepare-media.ts"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.8",

@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import {
   ARTWORK_TYPES,
+  PUBLICATION_BASIS,
   FRAME_STYLES,
   LIGHTING_PROFILES,
   LINK_HEALTH,
@@ -174,6 +175,18 @@ export const RightsRecordSchema = z.object({
   commercialUseAllowed: z.boolean().default(false),
   licenseUrl: ExternalUrl.nullable().default(null),
   notes: z.string().max(2000).nullable().default(null),
+
+  /**
+   * Why the House believes it may show this work publicly at all. Starts at nothing and
+   * is only ever raised by a human recording evidence (docs/rights.md).
+   */
+  publicationBasis: z.enum(PUBLICATION_BASIS).default('not-established'),
+  /** Who granted permission — a person or entity, not a marketplace listing. */
+  permissionGrantedBy: z.string().max(200).nullable().default(null),
+  /** When the House recorded it, so a claim can be traced to a date. */
+  permissionRecordedOn: IsoDate.nullable().default(null),
+  /** Where the evidence lives: an email thread, a signed note, a licence page. */
+  permissionEvidence: z.string().max(2000).nullable().default(null),
 });
 export type RightsRecord = z.infer<typeof RightsRecordSchema>;
 

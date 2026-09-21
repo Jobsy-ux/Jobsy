@@ -30,7 +30,10 @@ decision, never a side effect.
 - A sync may never overwrite a curated field. Provider data lands in
   `external_metadata_source` and is offered as a suggestion, not applied (§45).
 - Rights cannot be inferred from ownership. Enabling high-resolution re-hosting requires
-  an explicit rights record (§30).
+  an explicit rights record *and* a recorded publication basis (§30, `docs/rights.md`).
+- Publishing a work requires a basis with evidence: who permitted it, when, and where that
+  is recorded. The CMS should collect those together, and the production build fails
+  without them.
 - Provenance events require a certainty. There is no "probably" that renders as fact (§28).
 - A placement's height is not editable, because it is derived from the work (§14).
 - A link must declare whether it refers to the work the House owns or to the artist's

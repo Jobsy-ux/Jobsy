@@ -129,6 +129,21 @@ export const RIGHTS_STATUSES = [
 ] as const;
 export type RightsStatus = (typeof RIGHTS_STATUSES)[number];
 
+/**
+ * On what basis a work may be shown publicly at all (§30, docs/rights.md).
+ *
+ * Deliberately separate from `RIGHTS_STATUSES`, which describes what the House may do
+ * with the media. This describes why the House believes it may publish anything at all,
+ * and it starts at nothing. Ownership of a token is never one of these bases.
+ */
+export const PUBLICATION_BASIS = [
+  'not-established', // the default: no basis recorded, so nothing is assumed
+  'explicit-permission', // the artist or rights holder said yes, and it is recorded
+  'verified-license', // a licence permits it, and the licence is on file
+  'owner-created', // the House made the asset itself (e.g. generated placeholder media)
+] as const;
+export type PublicationBasis = (typeof PUBLICATION_BASIS)[number];
+
 /** External destinations we know how to label and verify (§23). */
 export const LINK_PLATFORMS = [
   'opensea',

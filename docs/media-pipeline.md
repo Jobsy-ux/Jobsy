@@ -49,8 +49,13 @@ stored, not gateway URLs: a gateway is a route that changes, a CID is the work's
 ## Rights gate
 
 A high-resolution derivative is published only when `rights_record` explicitly permits
-re-hosting. Ownership of a work never implies it (§30). `mayPublishHighResolution` is the
-single check; the database has a matching constraint.
+re-hosting, and only on top of a recorded publication basis. Ownership of a work never
+implies either (§30). Anything served publicly is capped at 2048px on the longest edge
+unless high resolution has been explicitly permitted, and archival originals are never
+served from the public directory at all.
+
+`docs/rights.md` is canonical for the whole posture; `mayPublishHighResolution` and
+`mayServePublicly` are the checks, with matching constraints in the database.
 
 ## Demo media
 
