@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1250" width="1000" height="1250" role="img" aria-label="Placeholder vector composition">
+  <title>Placeholder vector composition (demo record)</title>
+  <rect width="1000" height="1250" fill="#0d0d0f"/>
+  <g fill="none" stroke="#d6cebe" stroke-width="1.25" opacity="0.5">
+    <line x1="90" y1="120" x2="910" y2="120"/>
+    <line x1="90" y1="156" x2="910" y2="156"/>
+    <line x1="90" y1="192" x2="910" y2="192"/>
+    <line x1="90" y1="228" x2="910" y2="228"/>
+    <line x1="90" y1="264" x2="910" y2="264"/>
+    <line x1="90" y1="300" x2="910" y2="300"/>
+    <line x1="90" y1="336" x2="910" y2="336"/>
+    <line x1="90" y1="372" x2="910" y2="372"/>
+    <line x1="90" y1="408" x2="910" y2="408"/>
+    <line x1="90" y1="444" x2="910" y2="444"/>
+    <line x1="90" y1="480" x2="910" y2="480"/>
+    <line x1="90" y1="516" x2="910" y2="516"/>
+    <line x1="90" y1="552" x2="910" y2="552"/>
+    <line x1="90" y1="588" x2="910" y2="588"/>
+    <line x1="90" y1="624" x2="910" y2="624"/>
+    <line x1="90" y1="660" x2="910" y2="660"/>
+    <line x1="90" y1="696" x2="910" y2="696"/>
+    <line x1="90" y1="732" x2="910" y2="732"/>
+    <line x1="90" y1="768" x2="910" y2="768"/>
+    <line x1="90" y1="804" x2="910" y2="804"/>
+    <line x1="90" y1="840" x2="910" y2="840"/>
+    <line x1="90" y1="876" x2="910" y2="876"/>
+    <line x1="90" y1="912" x2="910" y2="912"/>
+    <line x1="90" y1="948" x2="910" y2="948"/>
+    <line x1="90" y1="984" x2="910" y2="984"/>
+    <line x1="90" y1="1020" x2="910" y2="1020"/>
+    <line x1="90" y1="1056" x2="910" y2="1056"/>
+    <line x1="90" y1="1092" x2="910" y2="1092"/>
+  </g>
+  <rect x="150" y="260" width="380" height="620" fill="#2a847a"/>
+  <rect x="470" y="430" width="400" height="250" fill="#c45426"/>
+  <circle cx="470" cy="430" r="86" fill="#0d0d0f"/>
+</svg>

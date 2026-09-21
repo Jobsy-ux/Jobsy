@@ -1,0 +1,97 @@
+/*
+ * HOUSE OF NUCCI — design tokens.
+ *
+ * Every value the interface uses resolves here. Tailwind is a utility compiler in this
+ * project, not a look: no default palette, no default radii, no default shadows (§95–96).
+ *
+ * The room is dark so the artwork is bright. Nothing in this file is allowed to sit on
+ * top of an artwork and tint it (§05, §14).
+ */
+
+:root {
+  /* --- surface: architecture, from deepest to nearest ---------------------- */
+  --hon-void: #08080a;          /* the black beyond the building */
+  --hon-concrete: #0d0e10;      /* page ground */
+  --hon-graphite: #141517;      /* raised surface */
+  --hon-stone: #1b1c1f;         /* panel, hover ground */
+  --hon-limestone: #23231f;     /* warm stone, used sparingly */
+
+  /* --- line: architecture is drawn with edges, not shadows ----------------- */
+  --hon-edge: rgba(236, 231, 221, 0.10);
+  --hon-edge-strong: rgba(236, 231, 221, 0.22);
+  --hon-edge-faint: rgba(236, 231, 221, 0.05);
+
+  /* --- type ---------------------------------------------------------------- */
+  --hon-bone: #ece7dd;          /* museum white, warm */
+  --hon-bone-dim: #b6b0a6;      /* secondary */
+  --hon-quiet: #85817a;         /* metadata, captions */
+  --hon-faint: #5d5a55;         /* disabled, rules */
+
+  /* --- the single accent. Brass, not neon. Used for focus and outbound. ----- */
+  --hon-brass: #b58455;
+  --hon-brass-dim: #7c5a3a;
+
+  /* --- state --------------------------------------------------------------- */
+  --hon-warning: #c07a4a;
+  --hon-demo: #6d6a92;          /* demo-record marker: visible, never decorative */
+
+  /* --- type families ------------------------------------------------------- */
+  --hon-display: var(--font-display), 'Times New Roman', serif;
+  --hon-text: var(--font-text), 'Helvetica Neue', Arial, sans-serif;
+
+  /* --- type scale. Display sizes are fluid; interface sizes are not. -------- */
+  --hon-size-monument: clamp(3.2rem, 9vw, 8.5rem);
+  --hon-size-display: clamp(2.4rem, 5.4vw, 4.6rem);
+  --hon-size-title: clamp(1.7rem, 3vw, 2.6rem);
+  --hon-size-heading: 1.3rem;
+  --hon-size-body: 1rem;
+  --hon-size-small: 0.875rem;
+  --hon-size-label: 0.6875rem;   /* museum wall label */
+  --hon-size-micro: 0.625rem;
+
+  --hon-leading-tight: 1.05;
+  --hon-leading-snug: 1.25;
+  --hon-leading-body: 1.62;
+  --hon-tracking-label: 0.16em;
+  --hon-tracking-wide: 0.06em;
+  --hon-tracking-display: -0.02em;
+
+  /* --- spacing. A 4px base with an architectural rhythm. ------------------- */
+  --hon-space-1: 0.25rem;
+  --hon-space-2: 0.5rem;
+  --hon-space-3: 0.75rem;
+  --hon-space-4: 1rem;
+  --hon-space-5: 1.5rem;
+  --hon-space-6: 2rem;
+  --hon-space-7: 3rem;
+  --hon-space-8: 4rem;
+  --hon-space-9: 6rem;
+  --hon-space-10: 8rem;
+  --hon-space-11: 12rem;
+
+  --hon-gutter: clamp(1.25rem, 4vw, 4rem);
+  --hon-measure: 34rem;         /* reading width for prose */
+  --hon-max: 90rem;
+
+  /* --- motion. Slow confidence; nothing springs, nothing bounces (§97). ---- */
+  --hon-ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --hon-ease-architectural: cubic-bezier(0.65, 0, 0.35, 1);
+  --hon-duration-quick: 180ms;
+  --hon-duration-considered: 420ms;
+  --hon-duration-architectural: 900ms;
+
+  /* Artwork is never given a radius: a frame is metadata, not a CSS decision. */
+  --hon-radius-none: 0;
+}
+
+/*
+ * The institution has one light condition. There is no light theme: an artwork lit for
+ * a dark room and then shown on white is a different artwork (§05).
+ */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --hon-duration-quick: 1ms;
+    --hon-duration-considered: 1ms;
+    --hon-duration-architectural: 1ms;
+  }
+}

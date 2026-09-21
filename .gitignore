@@ -1,0 +1,17 @@
+node_modules/
+.next/
+out/
+build/
+coverage/
+.env
+.env.local
+.env*.local
+*.tsbuildinfo
+next-env.d.ts
+.DS_Store
+.vercel
+/playwright-report/
+/test-results/
+
+# Staged manifest imports are working files for a curator to review, not records.
+content/imported/

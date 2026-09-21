@@ -1,0 +1,45 @@
+{
+  "name": "house-of-nucci",
+  "version": "0.1.0",
+  "private": true,
+  "description": "House of Nucci \u2014 The Collection. A private digital art institution.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "validate:collection": "tsx scripts/validate-collection.ts",
+    "check": "npm run typecheck && npm run lint && npm run test && npm run validate:collection",
+    "import:manifest": "tsx scripts/import-manifest.ts",
+    "generate:placeholders": "node scripts/generate-placeholder-media.mjs",
+    "smoke": "node scripts/smoke.mjs"
+  },
+  "dependencies": {
+    "@react-three/drei": "^10.7.8",
+    "@react-three/fiber": "^9.7.0",
+    "next": "^16.3.5",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "three": "^0.186.0",
+    "zod": "^4.6.5"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.7",
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^22.10.0",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@types/three": "^0.186.0",
+    "eslint": "^9.17.0",
+    "eslint-config-next": "^16.3.5",
+    "ffmpeg-static": "^5.3.0",
+    "playwright": "^1.63.0",
+    "tailwindcss": "^4.3.3",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vitest": "^3.2.4"
+  }
+}

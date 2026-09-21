@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- House of Nucci: a doorway cut into a dark facade. Architecture, not a logotype. -->
+  <rect width="64" height="64" fill="#0d0e10"/>
+  <rect x="10" y="8" width="44" height="48" fill="none" stroke="#ece7dd" stroke-width="2"/>
+  <path d="M24 56 V26 a8 8 0 0 1 16 0 V56 Z" fill="#b58455"/>
+</svg>
